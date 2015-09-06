@@ -3,9 +3,10 @@ package processor;
 import spoon.processing.AbstractProcessor;
 
 import spoon.reflect.declaration.CtAnnotation;
-import annotation.MyAnnotation;;
+import annotation.FeatureAnnotation;
+import annotation.MyAnnotation;
 
-public class Processor extends AbstractProcessor<CtAnnotation<MyAnnotation>>{
+public class Processor extends AbstractProcessor<CtAnnotation<FeatureAnnotation>>{
 
 	@Override
 	public void init() {
@@ -13,9 +14,12 @@ public class Processor extends AbstractProcessor<CtAnnotation<MyAnnotation>>{
 		super.init();
 	}
 	@Override
-	public void process(CtAnnotation<MyAnnotation> annotation) {
-		String attributeValue = annotation.getActualAnnotation().myAttribute();
-		System.out.println("Anotacion encontrada, atributo: "+attributeValue);
+	public void process(CtAnnotation<FeatureAnnotation> annotation) {
+		boolean mandatory = annotation.getActualAnnotation().Mandatory();
+		String name = annotation.getActualAnnotation().Name();
+		
+		System.out.println("Anotacion encontrada, Name: "+name);
+		System.out.println("Mandatorio: "+mandatory);
 		System.out.println("\t usada en: "+annotation.getParent().getSignature());
 	}
 	
