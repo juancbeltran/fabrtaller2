@@ -23,13 +23,15 @@ public class Invoker {
 	 */
 	protected void invokeSpoon(String source, String processor) {
 		// Invoke spoon processor for methods
-		String[] spoonArgs = new String[6];
+		String[] spoonArgs = new String[7];
 		spoonArgs[0] = "-i";
 		spoonArgs[1] = source;
 		spoonArgs[2] = "-p";
 		spoonArgs[3] = processor;
 		spoonArgs[4] = "--compliance";
 		spoonArgs[5] = "7";
+		spoonArgs[6] = "-v";
+		
 		try {
 			Launcher.main(spoonArgs);
 		} catch (Exception e) {

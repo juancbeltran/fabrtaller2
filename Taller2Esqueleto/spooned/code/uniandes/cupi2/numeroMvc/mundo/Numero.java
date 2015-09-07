@@ -16,12 +16,13 @@ package uniandes.cupi2.numeroMvc.mundo;
 import java.util.Observable;
 
 import annotation.FeatureAnnotation;
+import annotation.RelationType;
 
 /**
  * Representa un n�mero que puede ser observado.
  */
 //children = ["Numero","cambiarNumero","metodo1","metodo2"]
-@annotation.RelationAnnotation(relationType=RelationType.OR ,children= new String[] = {"Numero","cambiarNumero","metodo1","metodo2"})
+@annotation.RelationAnnotation(relationType = RelationType.OR, children = {"Numero","cambiarNumero","metodo1","metodo2"})
 public class Numero extends Observable
 {
 

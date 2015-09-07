@@ -1,6 +1,7 @@
 package code;
 
 import annotation.MyAnnotation;
+import annotation.RelationType;
 
 @MyAnnotation(myAttribute="TestClass")
 public class TestClass {
@@ -21,6 +22,7 @@ public class TestClass {
 		return i;
 	}
 	
+	@annotation.RelationAnnotation(relationType = RelationType.OR, children = {"Numero","cambiarNumero","metodo1","metodo2"})	
 	public int getI() {
 		return i;
 	}
