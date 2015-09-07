@@ -7,14 +7,18 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.List;
 import annotation.FeatureAnnotation;
 
 public class Processor extends AbstractProcessor {
 
+	List<CtAnnotation<? extends Annotation>> codeAnnotations;
+	
 	@Override
 	public void init() {
 		System.out.println("Empieza procesamiento");
+		codeAnnotations = new ArrayList<CtAnnotation<? extends Annotation>>();
 		super.init();
 	}
 	
@@ -33,9 +37,11 @@ public class Processor extends AbstractProcessor {
 	public void processingDone() {
 		System.out.println("Termina procesamiento");
 		super.processingDone();
+		
+		FeatureIdeWriter featureIdeWriter = new FeatureIdeWriter();
+		featureIdeWriter.WriteFeatureIdeFile(codeAnnotations);
 	}
 
-	
 	@Override
 	public void process(CtElement element) {
 			
@@ -43,6 +49,7 @@ public class Processor extends AbstractProcessor {
 		
 		for (CtAnnotation<? extends Annotation> annotation : annotations)
 		{
+			codeAnnotations.add(annotation);
 			CtTypeReference<? extends Annotation> annotationType = annotation.getAnnotationType();
 			System.out.println("Anotacion encontrada, tipo: "+annotationType );			
 			System.out.println("\t usada en: "+annotation.getParent().getSignature());			
@@ -54,5 +61,4 @@ public class Processor extends AbstractProcessor {
 			}
 		}
 	}	
-	
 }

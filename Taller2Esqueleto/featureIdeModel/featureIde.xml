@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="abc">
+				<alt name="Base">
+					<and mandatory="true" name="NewLayer1">
+						<feature mandatory="true" name="NewLayer3"/>
+					</and>
+					<and mandatory="true" name="NewLayer2">
+						<feature name="NewLayer4"/>
+					</and>
+				</alt>
+			</and>
+		</struct>
+	</featureModel>
