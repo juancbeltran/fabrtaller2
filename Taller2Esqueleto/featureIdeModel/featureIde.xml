@@ -1,28 +1,40 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<featureModel chosenLayoutAlgorithm="1">
-    <struct>
-        <and name="RootNumero">
-            <feature mandatory="true" name="Numero"/>
-            <feature mandatory="true" name="darNumero"/>
-            <feature mandatory="false" name="metodo1"/>
-            <feature mandatory="false" name="metodo2"/>
-            <feature mandatory="false" name="cambiarNumero"/>
-        </and>
-    </struct>
-    <constraints>
-        <rule>
-            <imp>
-                <var>Numero</var>
-                <var>cambiarNumero</var>
-            </imp>
-        </rule>
-        <rule>
-            <imp>
-                <var>metodo1</var>
-                <not>
-                    <var>metodo2</var>
-                </not>
-            </imp>
-        </rule>
-    </constraints>
-</featureModel>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and mandatory="true" name="PanelMvcNumero">
+				<alt name="RootNumero">
+					<feature mandatory="true" name="Numero"/>
+					<feature mandatory="true" name="darNumero"/>
+					<feature mandatory="true" name="metodo1"/>
+					<feature mandatory="true" name="metodo2"/>
+					<feature mandatory="true" name="cambiarNumero"/>
+				</alt>
+				<feature mandatory="true" name="actionPerformed"/>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Numero</var>
+					<var>cambiarNumero</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>metodo1</var>
+					<not>
+						<var>metodo2</var>
+					</not>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>actionPerformed</var>
+					<var>cambiarNumero</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
