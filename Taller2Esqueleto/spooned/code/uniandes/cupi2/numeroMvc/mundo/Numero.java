@@ -17,6 +17,7 @@ import java.util.Observable;
 
 import annotation.FeatureAnnotation;
 import annotation.RelationType;
+import annotation.Rules;
 
 /**
  * Representa un n�mero que puede ser observado.
@@ -44,6 +45,7 @@ public class Numero extends Observable
      * Construye el n�mero inicializ�ndolo en 0.
      */
     @annotation.FeatureAnnotation(Mandatory = true, Name="Numero")
+    @annotation.RestrictionAnnotation(target="cambiarNumero", rules=Rules.IMPLIES)
     public Numero( )
     {
         numero = 0;
@@ -86,6 +88,7 @@ public class Numero extends Observable
      * @return respuesta1.
      */
     @annotation.FeatureAnnotation(Mandatory = false,Name="metodo1")
+    @annotation.RestrictionAnnotation(target="metodo2", rules=Rules.NOT_IMPLIES)
     public String metodo1( )
     {
         return "Respuesta 1";

@@ -18,11 +18,11 @@ public class PanelExtension extends javax.swing.JPanel implements java.awt.event
         principal = ip;
         setBorder(new javax.swing.border.TitledBorder("Opciones"));
         setLayout(new java.awt.GridLayout(1 , 2));
-        btnOpcion1 = new javax.swing.JButton("Opci?n 1");
+        btnOpcion1 = new javax.swing.JButton("Opci�n 1");
         btnOpcion1.setActionCommand(OPCION_1);
         btnOpcion1.addActionListener(this);
         add(btnOpcion1);
-        btnOpcion2 = new javax.swing.JButton("Opci?n 2");
+        btnOpcion2 = new javax.swing.JButton("Opci�n 2");
         btnOpcion2.setActionCommand(OPCION_2);
         btnOpcion2.addActionListener(this);
         add(btnOpcion2);

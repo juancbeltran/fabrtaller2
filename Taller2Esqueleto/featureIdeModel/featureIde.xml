@@ -1,16 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-	<featureModel chosenLayoutAlgorithm="1">
-		<struct>
-			<and mandatory="true" name="RootNumero">
-				<feature mandatory="true" name="Numero"/>
-				<feature mandatory="true" name="darNumero"/>
-				<feature name="metodo1"/>
-				<feature name="metodo2"/>
-				<feature name="cambiarNumero"/>
-			</and>
-		</struct>
-		<constraints/>
-		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
-		<comments/>
-		<featureOrder userDefined="false"/>
-	</featureModel>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<featureModel chosenLayoutAlgorithm="1">
+    <struct>
+        <and name="RootNumero">
+            <feature mandatory="true" name="Numero"/>
+            <feature mandatory="true" name="darNumero"/>
+            <feature mandatory="false" name="metodo1"/>
+            <feature mandatory="false" name="metodo2"/>
+            <feature mandatory="false" name="cambiarNumero"/>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>Numero</var>
+                <var>cambiarNumero</var>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>metodo1</var>
+                <not>
+                    <var>metodo2</var>
+                </not>
+            </imp>
+        </rule>
+    </constraints>
+</featureModel>

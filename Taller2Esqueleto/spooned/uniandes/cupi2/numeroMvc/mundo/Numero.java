@@ -7,6 +7,7 @@ public class Numero extends java.util.Observable {
     private int numero;
 
     @annotation.FeatureAnnotation(Mandatory = true, Name = "Numero")
+    @annotation.RestrictionAnnotation(rules = annotation.Rules.IMPLIES, target = "cambiarNumero")
     public Numero() {
         numero = 0;
     }
@@ -24,6 +25,7 @@ public class Numero extends java.util.Observable {
     }
 
     @annotation.FeatureAnnotation(Mandatory = false, Name = "metodo1")
+    @annotation.RestrictionAnnotation(rules = annotation.Rules.NOT_IMPLIES, target = "metodo2")
     public java.lang.String metodo1() {
         return "Respuesta 1";
     }
