@@ -9,22 +9,7 @@
 				<feature name="cambiarNumero"/>
 			</and>
 		</struct>
-		<constraints>
-			<rule>
-				<imp>
-					<var>RootNumero</var>
-					<var>Numero</var>
-				</imp>
-			</rule>
-			<rule>
-				<imp>
-					<var>metodo1</var>
-					<not>
-						<var>metodo2</var>
-					</not>
-				</imp>
-			</rule>
-		</constraints>
+		<constraints/>
 		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
 		<comments/>
 		<featureOrder userDefined="false"/>
