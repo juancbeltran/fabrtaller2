@@ -22,7 +22,8 @@ import annotation.RelationType;
  * Representa un n�mero que puede ser observado.
  */
 //children = ["Numero","cambiarNumero","metodo1","metodo2"]
-@annotation.RelationAnnotation(relationType = RelationType.OR, children = {"Numero","cambiarNumero","metodo1","metodo2"})
+@annotation.RelationAnnotation(relationType = RelationType.OR, children = { "Numero", "cambiarNumero", "metodo1", "metodo2", "darNumero" })
+@annotation.FeatureAnnotation(Mandatory = true, Name = "RootNumero")
 public class Numero extends Observable
 {
 
@@ -42,7 +43,7 @@ public class Numero extends Observable
     /**
      * Construye el n�mero inicializ�ndolo en 0.
      */
-    @annotation.FeatureAnnotation(Mandatory = true,Name="Numero")
+    @annotation.FeatureAnnotation(Mandatory = true, Name="Numero")
     public Numero( )
     {
         numero = 0;
@@ -56,7 +57,7 @@ public class Numero extends Observable
      * Cambia el valor del n�mero.
      * @param nuevoNumero Nuevo valor de n�mero.
      */
-    @annotation.FeatureAnnotation(Mandatory = false,Name="cambiarNumero")
+    @annotation.FeatureAnnotation(Mandatory = false, Name="cambiarNumero")
     public void cambiarNumero( int nuevoNumero )
     {
         // Cambia el n�mero
@@ -70,7 +71,7 @@ public class Numero extends Observable
      * Devuelve el valor del n�mero.
      * @return Valor actual del n�mero.
      */
-    @annotation.FeatureAnnotation(Mandatory = true)
+    @annotation.FeatureAnnotation(Mandatory = true, Name="darNumero")
     public int darNumero( )
     {
         return numero;

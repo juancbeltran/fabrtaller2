@@ -38,8 +38,8 @@ public class Processor extends AbstractProcessor {
 		System.out.println("Termina procesamiento");
 		super.processingDone();
 		
-		FeatureIdeWriter featureIdeWriter = new FeatureIdeWriter();
-		featureIdeWriter.WriteFeatureIdeFile(codeAnnotations);
+		FeatureIdeWriter featureIdeWriter = new FeatureIdeWriter(codeAnnotations);
+		featureIdeWriter.WriteFeatureIdeFile();
 	}
 
 	@Override
