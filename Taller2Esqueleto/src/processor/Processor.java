@@ -22,31 +22,22 @@ public class Processor extends AbstractProcessor {
 		super.init();
 	}
 	
-/*	
 	@Override
-	public void process(CtAnnotation<FeatureAnnotation> annotation) {
-		boolean mandatory = annotation.getActualAnnotation().Mandatory();
-		String name = annotation.getActualAnnotation().Name();
-		
-		System.out.println("Anotacion encontrada, Name: "+name);
-		System.out.println("Mandatorio: "+mandatory);
-		System.out.println("\t usada en: "+annotation.getParent().getSignature());
-	}
-*/	
-	@Override
-	public void processingDone() {
-		System.out.println("Termina procesamiento");
+	public void processingDone() {		
+
 		super.processingDone();
-		
+		//// Genera el archivo xml con la representación del arbol según anotaciones
 		FeatureIdeWriter featureIdeWriter = new FeatureIdeWriter(codeAnnotations);
-		featureIdeWriter.WriteFeatureIdeFile();
+		featureIdeWriter.WriteFeatureIdeFile("./featureIdeModel/featureIde.xml");
+		
+		System.out.println("Termina procesamiento, archivo creado ./featureIdeModel/featureIde.xml ");
 	}
 
 	@Override
-	public void process(CtElement element) {
-			
+	public void process(CtElement element) 
+	{
+		//// Lee todas las anotaciones de tipo CtAnnotation<? extends Annotation> y las almacena en una lista
 		List<CtAnnotation<? extends Annotation>> annotations = element.getAnnotations();
-		
 		for (CtAnnotation<? extends Annotation> annotation : annotations)
 		{
 			codeAnnotations.add(annotation);
@@ -54,11 +45,13 @@ public class Processor extends AbstractProcessor {
 			System.out.println("Anotacion encontrada, tipo: "+annotationType );			
 			System.out.println("\t usada en: "+annotation.getParent().getSignature());			
 
+			/*
 			if (annotationType.getActualClass() == FeatureAnnotation.class)
 			{
 				FeatureAnnotation actualAnnotation = (FeatureAnnotation)annotation.getActualAnnotation();				
 				System.out.println("\t FeatureAnnotation encontrada, atributo: "+actualAnnotation.Name());
 			}
+			*/
 		}
 	}	
 }

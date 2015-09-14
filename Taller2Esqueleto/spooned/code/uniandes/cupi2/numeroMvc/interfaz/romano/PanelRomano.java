@@ -33,6 +33,7 @@ import uniandes.cupi2.numeroMvc.mundo.Numero;
 /**
  * Panel Vista-Controlador de la visualización Tipo Romano.
  */
+@annotation.FeatureAnnotation(Mandatory = true, Name = "PanelRomano")
 public class PanelRomano extends JPanel implements Observer, ActionListener
 {
 

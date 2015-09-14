@@ -25,8 +25,14 @@ import featureidejaxb.Rule;
 import featureidejaxb.Struct;
 import spoon.reflect.declaration.CtAnnotation;
 
+/**
+ * Construcción del arbol featureide a partir de una lista de anotaciones
+ */
 public class FeatureIdeWriter {
 
+	/**
+	 * Listas con las diferentes tipos de anotaciones manejadas
+	 */
 	List<CtAnnotation<FeatureAnnotation>> featureAnnotations;
 	
 	List<CtAnnotation<RelationAnnotation>> relationAnnotations;
@@ -49,6 +55,9 @@ public class FeatureIdeWriter {
 				.map((m)-> (CtAnnotation<RestrictionAnnotation>)m).collect(Collectors.toList());		
 	}
 	
+	/**
+	 * Adiciona los hijos a un nodo padre
+	 */
 	private Object AddChildrenToParent(CtAnnotation<FeatureAnnotation> father, boolean isRootNode)
 	{
 		CtAnnotation<RelationAnnotation> relation = this.FindRelation(father);
@@ -62,7 +71,7 @@ public class FeatureIdeWriter {
 			return childNode;
 		} 
 		
-		Parent node = this.GetNodeType(relation, isRootNode);
+		Parent node = this.GetNodeType(relation, isRootNode, father.getActualAnnotation().Mandatory());
 		node.setName(father.getActualAnnotation().Name());
 	
 		for (CtAnnotation<FeatureAnnotation> child : children)
@@ -74,31 +83,48 @@ public class FeatureIdeWriter {
 		return node;
 	}
 	
-	
-	private Parent GetNodeType(CtAnnotation<RelationAnnotation> relation, boolean isRootNode)
+	/**
+	 * Obtiene el tipo de nodo según la relación
+	 */
+	private Parent GetNodeType(CtAnnotation<RelationAnnotation> relation, boolean isRootNode, boolean mandatory)
 	{
 		if (isRootNode)
 		{
 			return new And();
 		}
 		
-		if (relation.getActualAnnotation().relationType() == RelationType.XOR)
+		if (!isRootNode && relation.getActualAnnotation().relationType() == RelationType.XOR)
 		{
-			return new Or();
+			Or returnOr = new Or();
+			returnOr.setMandatory(mandatory);
+			return returnOr;
 		}
 		
-		if (relation.getActualAnnotation().relationType() == RelationType.OR)
+		if (!isRootNode && relation.getActualAnnotation().relationType() == RelationType.OR)
 		{
-			return new Alt();
+			Alt returnAlt = new Alt();
+			returnAlt.setMandatory(mandatory);
+			return returnAlt;
 		}
 		
-		return new And();
+		And returnAnd = new And();
+		returnAnd.setMandatory(mandatory);
+		return returnAnd;
 	}
 	
-	
-	public void WriteFeatureIdeFile() 
+	/**
+	 * Genera y escribe el archivo para featureide según la definición de anotaciones
+	 */
+	public void WriteFeatureIdeFile(String xmlOutputFile) 
 	{
 		CtAnnotation<FeatureAnnotation> root = this.FindRootNode();
+		
+		if (root == null)
+		{
+			System.err.println("Nodo raiz no fue encontrado, el proceos no puede continuar");
+			return;
+		}
+		
 		FeatureModel featureModel = new FeatureModel();
 		featureModel.setChosenLayoutAlgorithm(new BigInteger("1"));
 
@@ -109,9 +135,12 @@ public class FeatureIdeWriter {
 		featureStruct.setAnd((And)rootNode);
 		this.AddRestrictions(featureModel);
 	
-		JaxbWriterReader.jaxbWriterNoSchema(featureModel, "./featureIdeModel/featureIde.xml");
+		JaxbWriterReader.jaxbWriterNoSchema(featureModel, xmlOutputFile);
 	}
 	
+	/**
+	 * Adiciona las restricciones al modelo
+	 */	
 	private void AddRestrictions(FeatureModel featureModel)
 	{
 		Constraints constraints = new Constraints();
@@ -124,6 +153,9 @@ public class FeatureIdeWriter {
 		featureModel.setConstraints(constraints);
 	}
 	
+	/**
+	 * Crea una restricción según la anotación
+	 */	
 	private Rule CreateRule(CtAnnotation<RestrictionAnnotation> restriction)
 	{
 		Rule returnValue = new Rule();
@@ -149,19 +181,27 @@ public class FeatureIdeWriter {
 		return returnValue;
 	}
 	
+	/**
+	 * Busca una anotación de tipo CtAnnotation<FeatureAnnotation> por la firma del elemento en donde se encuentra
+	 */		
 	private CtAnnotation<FeatureAnnotation> FindFeatureBySignature(String parentSignature)
 	{
 		Optional<CtAnnotation<FeatureAnnotation>> relation = this.featureAnnotations.stream().filter((x)-> x.getParent().getSignature().equals(parentSignature)).findFirst();
 		return relation.isPresent() ? relation.get() : null;
 	}
 	
-	
+	/**
+	 * Busca una anotación de tipo CtAnnotation<FeatureAnnotation> por el nombre del feature
+	 */	
 	private CtAnnotation<FeatureAnnotation> FindFeatureByName(String nodeName)
 	{
 		Optional<CtAnnotation<FeatureAnnotation>> relation = this.featureAnnotations.stream().filter((x)-> x.getActualAnnotation().Name().equals(nodeName)).findFirst();
 		return relation.isPresent() ? relation.get() : null;
 	}
 	
+	/**
+	 * Busca el nodo raiz del arbol
+	 */		
 	private CtAnnotation<FeatureAnnotation> FindRootNode()
 	{
 		for (CtAnnotation<FeatureAnnotation> feature : this.featureAnnotations)
@@ -175,12 +215,18 @@ public class FeatureIdeWriter {
 		return null;
 	}
 	
+	/**
+	 * Busca la relación en la que está contenida un nodo tipo feature.
+	 */		
 	private CtAnnotation<RelationAnnotation> FindRelation(CtAnnotation<FeatureAnnotation> feature)
 	{
 		Optional<CtAnnotation<RelationAnnotation>> relation = this.relationAnnotations.stream().filter((x)-> x.getParent().getSignature().equals(feature.getParent().getSignature())).findFirst();
 		return relation.isPresent() ? relation.get() : null;
 	}
 	
+	/**
+	 * Busca los nodos hijos de un nodo padre usando la anotación de relación
+	 */	
 	private List<CtAnnotation<FeatureAnnotation>> FindChildren(CtAnnotation<RelationAnnotation> relation)
 	{
 		if (relation == null)

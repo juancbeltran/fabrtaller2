@@ -2,7 +2,7 @@ package uniandes.cupi2.numeroMvc.mundo;
 
 
 @annotation.RelationAnnotation(children = { "Numero" , "cambiarNumero" , "metodo1" , "metodo2" , "darNumero" }, relationType = annotation.RelationType.OR)
-@annotation.FeatureAnnotation(Mandatory = true, Name = "RootNumero")
+@annotation.FeatureAnnotation(Mandatory = false, Name = "RootNumero")
 public class Numero extends java.util.Observable {
     private int numero;
 

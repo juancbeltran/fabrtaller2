@@ -1,11 +1,14 @@
 package uniandes.cupi2.numeroMvc.interfaz.notas;
 
 
+@annotation.FeatureAnnotation(Mandatory = true, Name = "PanelNotas")
+@annotation.RelationAnnotation(children = { "removeNotify" , "TOCAR" , "PanelNotasNumero" }, relationType = annotation.RelationType.XOR)
 public class PanelNotas extends javax.swing.JPanel implements java.awt.event.ActionListener , java.util.Observer {
     private static final long serialVersionUID = 8169100775679594866L;
 
     private static final java.lang.String CAMBIAR = "Seleccionar Nota";
 
+    @annotation.FeatureAnnotation(Mandatory = true, Name = "TOCAR")
     private static final java.lang.String TOCAR = "Tocar";
 
     private uniandes.cupi2.numeroMvc.mundo.Numero numero;
@@ -16,6 +19,7 @@ public class PanelNotas extends javax.swing.JPanel implements java.awt.event.Act
 
     private javax.swing.JButton botonTocar;
 
+    @annotation.FeatureAnnotation(Mandatory = true, Name = "PanelNotasNumero")
     public PanelNotas(uniandes.cupi2.numeroMvc.mundo.Numero num) {
         numero = num;
         setLayout(new java.awt.BorderLayout());
@@ -44,6 +48,7 @@ public class PanelNotas extends javax.swing.JPanel implements java.awt.event.Act
         etiquetaNumero.setText((((("Frecuencia Musical: " + (darNota(numero.darNumero()))) + " (") + (numero.darNumero())) + ")"));
     }
 
+    @annotation.FeatureAnnotation(Mandatory = false, Name = "removeNotify")
     public void removeNotify() {
         numero.deleteObserver(this);
     }

@@ -48,7 +48,7 @@ public class PanelBinario extends javax.swing.JPanel implements java.awt.event.A
             int nuevoNumero = java.lang.Integer.parseInt(textoNumeroBinario.getText(), 2);
             numero.cambiarNumero(nuevoNumero);
         } catch (java.lang.NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El n�mero en binario especificado es inv�lido", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "El n?mero en binario especificado es inv?lido", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
 

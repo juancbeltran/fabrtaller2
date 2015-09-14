@@ -24,7 +24,7 @@ import annotation.Rules;
  */
 //children = ["Numero","cambiarNumero","metodo1","metodo2"]
 @annotation.RelationAnnotation(relationType = RelationType.OR, children = { "Numero", "cambiarNumero", "metodo1", "metodo2", "darNumero" })
-@annotation.FeatureAnnotation(Mandatory = true, Name = "RootNumero")
+@annotation.FeatureAnnotation(Mandatory = false, Name = "RootNumero")
 public class Numero extends Observable
 {
 

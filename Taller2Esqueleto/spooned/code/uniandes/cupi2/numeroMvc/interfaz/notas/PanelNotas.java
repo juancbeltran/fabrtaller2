@@ -29,11 +29,14 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import annotation.RelationType;
 import uniandes.cupi2.numeroMvc.mundo.Numero;
 
 /**
  * Panel Vista-Controlador de la visualización Tipo Nota Musical.
  */
+@annotation.FeatureAnnotation(Mandatory = true, Name = "PanelNotas")
+@annotation.RelationAnnotation(relationType = RelationType.XOR, children = { "removeNotify", "TOCAR", "PanelNotasNumero" })
 public class PanelNotas extends JPanel implements Observer, ActionListener
 {
 
@@ -54,6 +57,7 @@ public class PanelNotas extends JPanel implements Observer, ActionListener
     /**
      * Constante para la acción del botón de tocar nota.
      */
+    @annotation.FeatureAnnotation(Mandatory = true, Name = "TOCAR")
     private final static String TOCAR = "Tocar";
 
     // -----------------------------------------------------------------
@@ -88,6 +92,7 @@ public class PanelNotas extends JPanel implements Observer, ActionListener
      * Constructor del panel
      * @param num Número a visualizar
      */
+    @annotation.FeatureAnnotation(Mandatory = true, Name = "PanelNotasNumero")    
     public PanelNotas( Numero num )
     {
         // Guarda el número
@@ -142,6 +147,7 @@ public class PanelNotas extends JPanel implements Observer, ActionListener
     /**
      * Método llamado por JAVA al salir el panel de la vista del usuario.
      */
+    @annotation.FeatureAnnotation(Mandatory = false, Name = "removeNotify")    
     public void removeNotify( )
     {
         // Elimina el observador

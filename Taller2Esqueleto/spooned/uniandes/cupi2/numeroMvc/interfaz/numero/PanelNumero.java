@@ -48,7 +48,7 @@ public class PanelNumero extends javax.swing.JPanel implements java.awt.event.Ac
             int nuevoNumero = java.lang.Integer.parseInt(textoNumero.getText());
             numero.cambiarNumero(nuevoNumero);
         } catch (java.lang.NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El n�mero especificado es inv�lido", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "El n?mero especificado es inv?lido", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
 

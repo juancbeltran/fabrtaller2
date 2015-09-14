@@ -2,7 +2,7 @@ package uniandes.cupi2.numeroMvc.interfaz;
 
 
 @annotation.FeatureAnnotation(Mandatory = true, Name = "PanelMvcNumero")
-@annotation.RelationAnnotation(children = { "RootNumero" , "actionPerformed" }, relationType = annotation.RelationType.OR)
+@annotation.RelationAnnotation(children = { "RootNumero" , "actionPerformed" }, relationType = annotation.RelationType.DEFAULT)
 public class PanelExtension extends javax.swing.JPanel implements java.awt.event.ActionListener {
     private static final long serialVersionUID = -2712979860721352600L;
 
@@ -20,11 +20,11 @@ public class PanelExtension extends javax.swing.JPanel implements java.awt.event
         principal = ip;
         setBorder(new javax.swing.border.TitledBorder("Opciones"));
         setLayout(new java.awt.GridLayout(1 , 2));
-        btnOpcion1 = new javax.swing.JButton("Opci�n 1");
+        btnOpcion1 = new javax.swing.JButton("Opci?n 1");
         btnOpcion1.setActionCommand(OPCION_1);
         btnOpcion1.addActionListener(this);
         add(btnOpcion1);
-        btnOpcion2 = new javax.swing.JButton("Opci�n 2");
+        btnOpcion2 = new javax.swing.JButton("Opci?n 2");
         btnOpcion2.setActionCommand(OPCION_2);
         btnOpcion2.addActionListener(this);
         add(btnOpcion2);
@@ -32,6 +32,7 @@ public class PanelExtension extends javax.swing.JPanel implements java.awt.event
 
     @annotation.FeatureAnnotation(Mandatory = true, Name = "actionPerformed")
     @annotation.RestrictionAnnotation(rules = annotation.Rules.IMPLIES, target = "cambiarNumero")
+    @annotation.RelationAnnotation(children = { "PanelNotas" , "PanelRomano" }, relationType = annotation.RelationType.DEFAULT)
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (OPCION_1.equals(e.getActionCommand())) {
             principal.reqFuncOpcion1();

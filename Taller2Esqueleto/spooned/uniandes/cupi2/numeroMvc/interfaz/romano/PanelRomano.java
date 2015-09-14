@@ -1,6 +1,7 @@
 package uniandes.cupi2.numeroMvc.interfaz.romano;
 
 
+@annotation.FeatureAnnotation(Mandatory = true, Name = "PanelRomano")
 public class PanelRomano extends javax.swing.JPanel implements java.awt.event.ActionListener , java.util.Observer {
     private static final long serialVersionUID = 6027780429950087974L;
 

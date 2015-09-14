@@ -28,7 +28,7 @@ import annotation.Rules;
  * Panel de manejo de extensiones
  */
 @annotation.FeatureAnnotation(Mandatory = true, Name = "PanelMvcNumero")
-@annotation.RelationAnnotation(relationType = RelationType.OR, children = { "RootNumero", "actionPerformed" })
+@annotation.RelationAnnotation(relationType = RelationType.DEFAULT, children = { "RootNumero", "actionPerformed" })
 public class PanelExtension extends JPanel implements ActionListener
 {
 
@@ -112,6 +112,7 @@ public class PanelExtension extends JPanel implements ActionListener
      */
     @annotation.FeatureAnnotation(Mandatory = true, Name="actionPerformed")
     @annotation.RestrictionAnnotation(target="cambiarNumero", rules=Rules.IMPLIES)
+    @annotation.RelationAnnotation(children = { "PanelNotas", "PanelRomano" }, relationType = annotation.RelationType.DEFAULT)    
     public void actionPerformed( ActionEvent e )
     {
         if( OPCION_1.equals( e.getActionCommand( ) ) )
